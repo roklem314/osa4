@@ -106,6 +106,24 @@ test('all blogs are returned', async () => {
       expect(blogsAtEnd.length).toBe(helper.initialBlogs.length)
     
   })
+  test('blog can be deleted', async () => {
+    const oneBlog = await helper.blogsInDb()
+    const blogToDelete = oneBlog[0]
+
+    await api
+        .delete(`/api/blogs/${blogToDelete.id}`)
+        .expect(204)
+
+    const blogsOthers = await helper.blogsInDb()
+
+    expect(blogsOthers.length).toBe(
+        helper.initialBlogs.length - 1
+    )
+
+    const contents = blogsOthers.map(r => r.title)
+
+    expect(contents).not.toContain(blogToDelete.title)
+})
 
 afterAll(() => {
   mongoose.connection.close()
