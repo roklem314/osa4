@@ -23,9 +23,42 @@ const dummy = (blogs) => {
     return thatOne;
     //console.log(sum.reduce(reducer));
   }
+//   const mostBlogs = (blogs) => {
+//       const myArray = [];
+//      // let x = [];
+//         for (i in blogs){
+               
+//              let x = blogs[i].author;
+//             // console.log(x)
+//              myArray.push(x);
+//            // console.log(myArray)
+//               //  myArray == x;
+//               //  myArray.concat(x);
+            
+            
+//         }
+//         console.log(myArray);
+
+//       const countedAuthors = myArray.reduce(function(allAuthors, myArray){
+//           if (myArray in allAuthors){
+//               allAuthors[myArray]++;
+//           }
+//           else {
+//               allAuthors[myArray] = 1;
+//           }
+         
+//           return allAuthors;
+//       })
+//         const thatOne = countedAuthors;
+    
+//       console.log(countedAuthors)
+
+//       return countedAuthors;
+//   }
 
   module.exports = {
       dummy,
       totalLikes,
       favoriteBlog,
+    //   mostBlogs,
   }

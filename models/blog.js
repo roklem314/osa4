@@ -6,7 +6,6 @@ const mongoose = require('mongoose')
     url: String,
     likes: Number
   })
-  const Blog = mongoose.model('Blog', blogSchema)
 
   blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {
