@@ -23,7 +23,7 @@ blogsRouter.get('/:id', async (request, response, next) => {
 blogsRouter.post('/', async (request, response, next) => {
   try{
   const body = request.body
-  console.log(body)
+  //console.log(body)
   const blog = new Blog({
     title: body.title,
     author: body.author,
