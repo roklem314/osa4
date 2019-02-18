@@ -177,6 +177,66 @@ describe('when there is initially one user at db', async () => {
   })
 })
 
+  describe('invalid users cannot be add to collection users at db', async () => {
+    beforeEach(async () => {
+      await User.remove({})
+      const user = new User({ username: 'root',name: 'Rooter', password: 'sekret' })
+      await user.save()
+    })
+ 
+    test('creation fails with too short password', async () => {
+        const usersAtStart = await helper.usersInDb()
+
+        const newUser = {
+        username: 'root2',
+        name: 'Superuser2',
+        password: 'sa',
+        }
+
+        const result = await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+
+        const usersAtEnd = await helper.usersInDb()
+        expect(usersAtEnd.length).toBe(usersAtStart.length)
+    })
+    test('creation fails with too short name', async () => {
+        const usersAtStart = await helper.usersInDb()
+
+        const newUser = {
+        username: 'robery',
+        name: 'Su',
+        password: 'sa323',
+        }
+
+        const result = await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+
+        const usersAtEnd = await helper.usersInDb()
+        expect(usersAtEnd.length).toBe(usersAtStart.length)
+    })
+    test('creation fails with too short name and password', async () => {
+        const usersAtStart = await helper.usersInDb()
+
+        const newUser = {
+        username: 'ro3141',
+        name: 'Su',
+        password: '1',
+        }
+
+        const result = await api
+        .post('/api/users')
+        .send(newUser)
+        .expect(400)
+    
+        const usersAtEnd = await helper.usersInDb()
+        expect(usersAtEnd.length).toBe(usersAtStart.length)
+    })
+})
+
 
 afterAll(() => {
   mongoose.connection.close()
