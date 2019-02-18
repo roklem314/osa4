@@ -13,7 +13,7 @@ usersRouter.post('/', async (request, response, next) => {
   try {
     const body = request.body
     //console.log(body.password.length)
-    if (body.password.length < 4 || body.name.length < 4) {
+    if (body.password.length < 3 || body.name.length < 3) {
         response.status(400).end();
     }
     console.log(body)
